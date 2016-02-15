@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Registrieren
+{% endblock %}
+
+{% block mainContent %}
+    <h1>Registrieren</h1>
+    <br>
+    {% if error %}
+        <div class="alert alert-danger" role="alert">
+            {{ error }}
+        </div>
+    {% endif %}
+    <br>
+    <form method="post">
+        <div class="input-group">
+            <div class="input-group-addon"><span class="glyphicon glyphicon-user"></span></div>
+            <input type="text" name="username" class="form-control" id="username" placeholder="Benutzername">
+        </div>
+        <br>
+        <div class="input-group">
+            <div class="input-group-addon">
+                @
+            </div>
+            <input type="email" name="email" placeholder="E-Mail" id="email" class="form-control">
+        </div>
+        <br>
+        <div class="input-group">
+            <div class="input-group-addon">&bull;</div>
+            <input type="password" name="passwd" id="passwd" class="form-control" placeholder="Passwort">
+        </div>
+        <br>
+        <div class="input-group">
+            <div class="input-group-addon">
+                &bull;
+            </div>
+            <input type="password" name="passwdconfirm" placeholder="Passwort bestätigen" class="form-control">
+        </div>
+        <br>
+        <input type="submit" name="submit" value="Einloggen" class="btn btn-success btn-lg right">
+    </form>
+    <p>
+        Du hast bereits ein Account? <a href="{{ url_for('loginPage') }}">Einloggen</a>
+    </p>
+{% endblock %}

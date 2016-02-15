@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+{% block title %}
+	Start
+{% endblock %}
+
+{% block header %}
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/blog.css') }}">
+{% endblock %}
+
+{% block mainContent %}
+	<h1>Hier entsteht ein Blog</h1>
+	<div class="posts">
+		{% for elem in rows %}
+			<div class="post">
+				<h2><a href="{{ elem[4] }}">{{ elem[0] }}</a></h2>
+				<p>Eingetragen am {{ elem[1] }} von {{ elem[2] }}</p>
+				<hr>
+				<p>{{ elem[3]|safe }}</p>
+			</div>
+		{% endfor %}
+	</div>
+{% endblock %}

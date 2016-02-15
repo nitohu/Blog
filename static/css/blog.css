@@ -1,0 +1,13 @@
+.post {
+	background-color: white;
+	padding: 15px;
+	padding-bottom: 30px;
+	margin-top: 15px;
+	margin-bottom: 10px;
+	border: 1px solid #bdc3c7;
+	border-radius: 10px;
+}
+
+.posts {
+	margin-top: 50px;
+}
