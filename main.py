@@ -9,7 +9,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 # Set Up
 app = Flask(__name__)
 # Secret Key muss geändert werden
-app.secret_key = "secret af"
+app.secret_key = "!\xc6\x8f\x12)\x9a\xa1L\x1a\xf2\xca\xa1W\xd8\x0c\xe4\xcb\x9f\x8b\xc4\xbf\x87F\x0e"
 conn, c = connect()
 os.environ["TZ"] = "Europe/Berlin"
 time.tzset()
@@ -83,6 +83,9 @@ def registPage():
 				# Wenn die Daten noch nicht eingetragen wurden, query ausführen
 				c.execute("INSERT INTO users (name, email, rank, passwd) VALUES ('%s', '%s', 'user', '%s')" % (request.form["username"], request.form["email"], generate_password_hash(request.form["passwd"]) ) )
 				conn.commit()
+				session["username"] = request.form["username"]
+				session["rank"] = "user"
+				return redirect( url_for("dashboardPage") )
 	return render_template("register.html")
 
 @app.route("/logout/")

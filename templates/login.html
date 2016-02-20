@@ -5,28 +5,46 @@
 {% endblock %}
 
 {% block mainContent %}
-	<h1>Einloggen</h1>
-	<br>
+	<!-- All the files that are required -->
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+<link href='http://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.13.1/jquery.validate.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<!-- Where all the magic happens -->
+<!-- LOGIN FORM -->
+<div class="text-center" style="padding:50px 0">
+	<div class="logo">Einloggen</div>
 	{% if error %}
 		<div class="alert alert-danger" role="alert">
 			{{ error }}
 		</div>
 	{% endif %}
-	<br>
-	<form method="post">
-		<div class="input-group">
-			<div class="input-group-addon"><span class="glyphicon glyphicon-user"></span></div>
-			<input type="text" name="username" class="form-control" id="username" placeholder="Benutzername">
-		</div>
-		<br>
-		<div class="input-group">
-			<div class="input-group-addon">&bull;</div>
-			<input type="password" name="passwd" id="passwd" class="form-control" placeholder="Passwort">
-		</div>
-		<br>
-		<input type="submit" name="submit" value="Einloggen" class="btn btn-success btn-lg right">
-	</form>
-	<p>
-		Noch kein Account? <a href="{{ url_for('registPage') }}">Registrieren</a>
-	</p>
+	<!-- Main Form -->
+	<div class="login-form-1">
+		<form id="login-form" method="post" class="text-left">
+			<div class="login-form-main-message"></div>
+			<div class="main-login-form">
+				<div class="login-group">
+					<div class="form-group">
+						<label for="username" class="sr-only">Benutzername</label>
+						<input type="text" class="form-control" id="lg_username" name="username" placeholder="Benutzername">
+					</div>
+					<div class="form-group">
+						<label for="passwd" class="sr-only">Passwort</label>
+						<input type="password" class="form-control" id="lg_password" name="passwd" placeholder="Passwort">
+					</div>
+				</div>
+				<button type="submit" class="login-button"><i class="fa fa-chevron-right"></i></button>
+			</div>
+			<div class="etc-login-form">
+				<p>Neuer Benutzer? <a href="{{ url_for('registPage') }}">Account erstellen!</a></p>
+			</div>
+		</form>
+	</div>
+	<!-- end:Main Form -->
+</div>
+
+
+
 {% endblock %}

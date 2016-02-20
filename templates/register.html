@@ -4,43 +4,52 @@
     Registrieren
 {% endblock %}
 
+{% block header %}
+    <script src="{{ url_for('static', filename='js/passwd.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/passwd.css') }}">
+{% endblock %}
+
 {% block mainContent %}
-    <h1>Registrieren</h1>
-    <br>
+    <!-- REGISTRATION FORM -->
+<div class="text-center" style="padding:50px 0">
+    <div class="logo">Registrieren</div>
     {% if error %}
         <div class="alert alert-danger" role="alert">
             {{ error }}
         </div>
     {% endif %}
-    <br>
-    <form method="post">
-        <div class="input-group">
-            <div class="input-group-addon"><span class="glyphicon glyphicon-user"></span></div>
-            <input type="text" name="username" class="form-control" id="username" placeholder="Benutzername">
-        </div>
-        <br>
-        <div class="input-group">
-            <div class="input-group-addon">
-                @
+    <!-- Main Form -->
+    <div class="login-form-1">
+        <form id="register-form" class="text-left" method="post">
+            <div class="login-form-main-message"></div>
+            <div class="main-login-form">
+                <div class="login-group">
+                    <div class="form-group">
+                        <label for="reg_username" class="sr-only">Benutzername</label>
+                        <input type="text" class="form-control" id="reg_username" name="username" placeholder="Benutzername">
+                    </div>
+                    <div class="form-group">
+                        <label for="reg_email" class="sr-only">Email</label>
+                        <input type="text" class="form-control" id="reg_email" name="email" placeholder="Email">
+                    </div>
+                    <div class="form-group">
+                        <label for="reg_password" class="sr-only">Passwort</label>
+                        <input type="password" class="form-control" id="password" name="passwd" placeholder="Passwort">
+                        <div class="pwstrength_viewport_progress"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="reg_password_confirm" class="sr-only">Passwort bestätigen</label>
+                        <input type="password" class="form-control" id="reg_password_confirm" name="passwdconfirm" placeholder="Passwort bestätigen">
+                    </div>
+                </div>
+                <button type="submit" class="login-button"><i class="fa fa-chevron-right"></i></button>
             </div>
-            <input type="email" name="email" placeholder="E-Mail" id="email" class="form-control">
-        </div>
-        <br>
-        <div class="input-group">
-            <div class="input-group-addon">&bull;</div>
-            <input type="password" name="passwd" id="passwd" class="form-control" placeholder="Passwort">
-        </div>
-        <br>
-        <div class="input-group">
-            <div class="input-group-addon">
-                &bull;
+            <div class="etc-login-form">
+                <p>Du hast bereits einen Account? <a href="{{ url_for('loginPage') }}">login here</a></p>
             </div>
-            <input type="password" name="passwdconfirm" placeholder="Passwort bestätigen" class="form-control">
-        </div>
-        <br>
-        <input type="submit" name="submit" value="Einloggen" class="btn btn-success btn-lg right">
-    </form>
-    <p>
-        Du hast bereits ein Account? <a href="{{ url_for('loginPage') }}">Einloggen</a>
-    </p>
+        </form>
+    </div>
+    <!-- end:Main Form -->
+</div>
 {% endblock %}
