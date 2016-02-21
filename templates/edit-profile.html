@@ -1,0 +1,106 @@
+{% extends "layout.html" %}
+
+{% block title %}
+	{% if session["username"] %}
+		{{ session["username"] }}
+	{% else %}
+		Bitte einloggen
+	{% endif %}
+{% endblock %}
+
+{% block mainContent %}
+	{% if session["username"] %}
+		<h1>{{ session["username"] }}'s Profil bearbeiten</h1>
+		<div class="panel panel-info">
+			<div class="panel-heading">
+				<h3 class="panel-title">Profil bearbeiten</h3>
+			</div>
+			<div class="panel-body">
+				<!--
+				<table class="table table-striped">
+					<tbody>
+						<tr>
+							<td>Benutzername:</td>
+							<td><input type="text" class="" value="{{ user[0][0] }}"></td>
+						</tr>
+						<tr>
+							<td>E-Mail:</td>
+							<td>{{ user[0][1] }}</td>
+						</tr>
+						<tr>
+							<td>Rang:</td>
+							<td>{{ user[0][2] }}</td>
+						</tr>
+						<tr>
+							<td>Website:</td>
+							<td>{{ user[0][3] }}</td>
+						</tr>
+						<tr>
+							<td>Twitter:</td>
+							<td>{{ user[0][4] }}</td>
+						</tr>
+						<tr>
+							<td>Facebook:</td>
+							<td>{{ user[0][5] }}</td>
+						</tr>
+						<tr>
+							<td>Github:</td>
+							<td>{{ user[0][6] }}</td>
+						</tr>
+						<tr>
+							<td>YouTube:</td>
+							<td>{{ user[0][7] }}</td>
+						</tr>
+						<tr>
+							<td>Skype:</td>
+							<td>{{ user[0][8] }}</td>
+						</tr>
+					</tbody>
+				</table>-->
+				<form method="post">
+					<div class="form-group">
+						<label for="website">Website</label>
+						<input type="text" name="website" class="form-control" value="{{ user[0][2] }}">
+					</div>
+					<div class="form-group">
+						<label for="twLink">Twitter</label>
+						<input type="text" name="twLink" class="form-control" value="{{ user[0][3] }}">
+					</div>
+					<div class="form-group">
+						<label for="fbLink">Facebook</label>
+						<input type="text" name="fbLink" class="form-control" value="{{ user[0][4] }}">
+					</div>
+					<div class="form-group">
+						<label for="githubLink">GitHub</label>
+						<input type="text" name="githubLink" class="form-control" value="{{ user[0][5] }}">
+					</div>
+					<div class="form-group">
+						<label for="ytLink">YouTube</label>
+						<input type="text" name="ytLink" class="form-control" value="{{ user[0][6] }}">
+					</div>
+					<div class="form-group">
+						<label for="skype">Skypename</label>
+						<input type="text" name="skype" class="form-control" value="{{ user[0][7] }}">
+					</div>
+					<input type="submit" class="btn btn-primary" value="Bestätigen">
+				</form>
+			</div>
+		</div>
+		<p>Falls du deinen Benutzernamen, deine E-Mail oder dein Passwort ändern möchtest oder falls du deinen Account löschen möchtest, kontaktiere mich bitte per E-Mail: <a href="mailto:nitohu@nitohu.de">nitohu@nitohu.de</a> oder auf Twitter: <a href="https://twitter.com/niklashck">@niklashck</a>.</p>
+		<p><b>Die E-Mail sollte folgende Informationen Erhalten:</b></p>
+		<p>Bei Wunsch auf Änderung vom Benutzernamen, von der E-Mail oder vom Passwort:</p>
+		<ul>
+			<li>Benutzernamen</li>
+			<li>E-Mail</li>
+			<li>Passwort</li>
+			<li>Wunsch Benutzernamen/E-Mail/Passwort</li>
+		</ul>
+		<p>Bei Wunsch auf Löschung des Accounts:</p>
+		<ul>
+			<li>Benutzernamen</li>
+			<li>E-Mail</li>
+			<li>Passwort</li>
+			<li>Expliziter Wunsch auf Löschung des Accounts</li>
+		</ul>
+	{% endif %}
+{% endblock %}

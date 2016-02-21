@@ -8,7 +8,6 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 # Set Up
 app = Flask(__name__)
-# Secret Key muss geändert werden
 app.secret_key = "!\xc6\x8f\x12)\x9a\xa1L\x1a\xf2\xca\xa1W\xd8\x0c\xe4\xcb\x9f\x8b\xc4\xbf\x87F\x0e"
 conn, c = connect()
 os.environ["TZ"] = "Europe/Berlin"
@@ -87,6 +86,29 @@ def registPage():
 				session["rank"] = "user"
 				return redirect( url_for("dashboardPage") )
 	return render_template("register.html")
+
+@app.route("/profile/")
+def profilePage():
+	user = []
+	if "username" in session:
+		c.execute("SELECT name, email, rank, website, twLink, fbLink, githubLink, ytLink, skype FROM users WHERE name = '%s'" % session["username"])
+		for row in c.fetchall():
+			user.append(row)
+		return render_template("profile.html", user = user)
+	return render_template("profile.html")
+
+@app.route("/profile/edit/", methods=["POST", "GET"])
+def editProfilePage():
+	user = []
+	if "username" in session:
+		if request.method == "POST":
+			c.execute("UPDATE users SET website='%s', twLink='%s', fbLink='%s', githubLink='%s', ytLink='%s', skype='%s' WHERE name='%s'" % (request.form["website"], request.form["twLink"], request.form["fbLink"], request.form["githubLink"], request.form["ytLink"], request.form["skype"], session["username"]))
+			conn.commit()
+		c.execute("SELECT name, email, website, twLink, fbLink, githubLink, ytLink, skype FROM users WHERE name = '%s'" % session["username"])
+		for row in c.fetchall():
+			user.append(row)
+		return render_template("edit-profile.html", user = user)
+	return render_template("edit-profile.html")
 
 @app.route("/logout/")
 def logoutPage():

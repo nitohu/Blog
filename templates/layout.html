@@ -29,19 +29,20 @@
 
 				<div class="collapse navbar-collapse navbar-right">
 					<ul class="nav navbar-nav">
-						<li><a href="{{ url_for('index') }}">Startseite</a></li>
-						<li><a href="{{ url_for('about') }}">Über</a></li>
+						<li><a href="{{ url_for('index') }}"><i class="fa fa-home"></i>&nbsp;Startseite</a></li>
+						<li><a href="{{ url_for('about') }}"><i class="fa fa-question-circle"></i>&nbsp;Über</a></li>
 						{% if "username" in session %}
 							<li class="dropdown">
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ session["username"] }} <span class="caret"></span></a>
 								<ul class="dropdown-menu">
-									<li><a href="{{ url_for('dashboardPage') }}">Dashboard</a></li>
+									<li><a href="{{ url_for('dashboardPage') }}"><i class="fa fa-tachometer"></i>&nbsp;Dashboard</a></li>
+									<li><a href="{{ url_for('profilePage') }}"><i class="fa fa-user"></i>&nbsp;Profil</a></li>
 									<li role="separator" class="divider"></li>
-									<li><a href="{{ url_for('logoutPage') }}">Ausloggen</a></li>
+									<li><a href="{{ url_for('logoutPage') }}"><i class="fa fa-sign-out"></i>&nbsp;Ausloggen</a></li>
 								</ul>
 							</li>
 						{% else %}
-							<li><a href="{{ url_for('loginPage') }}">Einloggen</a></li>
+							<li><a href="{{ url_for('loginPage') }}"><i class="fa fa-sign-in"></i>&nbsp;Einloggen</a></li>
 						{% endif %}
 					</ul>
 				</div>

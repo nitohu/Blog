@@ -1,0 +1,67 @@
+{% extends "layout.html" %}
+
+{% block title %}
+	{% if session["username"] %}
+		{{ session["username"] }}
+	{% else %}
+		Bitte einloggen
+	{% endif %}
+{% endblock %}
+
+{% block mainContent %}
+	{% if session["username"] %}
+		<h1>{{ session["username"] }}'s Profil</h1>
+		<div class="panel panel-info">
+	        <div class="panel-heading">
+				<h3 class="panel-title">Profildetails</h3>
+			</div>
+			<div class="panel-body">
+				<table class="table table-striped">
+					<tbody>
+						<tr>
+							<td>Benutzername:</td>
+							<td>{{ user[0][0] }}</td>
+						</tr>
+						<tr>
+							<td>E-Mail:</td>
+							<td>{{ user[0][1] }}</td>
+						</tr>
+						<tr>
+							<td>Rang:</td>
+							<td>{{ user[0][2] }}</td>
+						</tr>
+						<tr>
+							<td>Website:</td>
+							<td>{{ user[0][3] }}</td>
+						</tr>
+						<tr>
+							<td>Twitter:</td>
+							<td>{{ user[0][4] }}</td>
+						</tr>
+						<tr>
+							<td>Facebook:</td>
+							<td>{{ user[0][5] }}</td>
+						</tr>
+						<tr>
+							<td>Github:</td>
+							<td>{{ user[0][6] }}</td>
+						</tr>
+						<tr>
+							<td>YouTube:</td>
+							<td>{{ user[0][7] }}</td>
+						</tr>
+						<tr>
+							<td>Skype:</td>
+							<td>{{ user[0][8] }}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="panel-footer">
+				<a href="{{ url_for('editProfilePage') }}" type="button" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Profil bearbeiten"><i class="fa fa-pencil-square-o"></i></a>
+			</div>
+		</div>
+	{% else %}
+		<h1>Bitte logge dich ein.</h1>
+	{% endif %}
+{% endblock %}
