@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+
+{% block title %}
+	{{ user[0] }}
+{% endblock %}
+
+{% block header %}
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/blog.css') }}">
+{% endblock %}
+
+{% block mainContent %}
+	{% if error %}
+		 {{ error }}
+	{% else %}
+		{{ user }}
+		<h1>{{ user[0] }}'s Profil</h1>
+		<div class="row">
+			<div class="col-md-6">
+				<h3>Veröffentlichte Posts</h3>
+			</div>
+			<div class="col-md-6">
+				<div class="post">
+					<p><b>Benutzername:</b> {{ user[0] }}</p>
+					<p><b>E-Mail:</b> {{ user[1] }}</p>
+					<p><b>Rang:</b> {{ user[2] }}</p>
+					<p><b>Website:</b> {{ user[3] }}</p>
+					<p><b>Twitter:</b> {{ user[4] }}</p>
+					<p><b>Facebook:</b> {{ user[5] }}</p>
+					<p><b>Github:</b> {{ user[6] }}</p>
+					<p><b>YouTube:</b> {{ user[7] }}</p>
+					<p><b>Skype:</b> {{ user[8] }}</p>
+				<div>
+			</div>
+		</div>
+	{% endif %}
+{% endblock %}

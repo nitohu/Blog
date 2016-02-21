@@ -87,7 +87,7 @@ def registPage():
 					elif row[1] == request.form["email"]:
 						return render_template("register.html", error = "E-Mail bereits vorhanden")
 				# Wenn die Daten noch nicht eingetragen wurden, query ausführen
-				c.execute("INSERT INTO users (name, email, rank, passwd) VALUES ('%s', '%s', 'user', '%s')" % (request.form["username"], request.form["email"], generate_password_hash(request.form["passwd"]) ) )
+				c.execute("INSERT INTO users (name, email, rank, passwd, link) VALUES ('%s', '%s', 'user', '%s', '%s')" % (request.form["username"], request.form["email"], generate_password_hash(request.form["passwd"]), request.form["username"].lower() ) )
 				conn.commit()
 				session["username"] = request.form["username"]
 				session["rank"] = "user"
@@ -116,6 +116,19 @@ def editProfilePage():
 			user.append(row)
 		return render_template("edit-profile.html", user = user)
 	return render_template("edit-profile.html")
+
+####################
+####################
+####################
+@app.route("/profile/<username>/")
+def viewProfilePage(username):
+	userDetails = []
+	c.execute("SELECT name, email, rank, twLink, fbLink, githubLink, ytLink, skype, link FROM users WHERE link='%s'" % username)
+	for row in c.fetchall():
+		userDetails = row
+	if userDetails == []:
+		return render_template("official-profile.html", error = "Den Benutzer '" + username + "' gibt es leider nicht.")
+	return render_template("official-profile.html", user = userDetails)
 
 @app.route("/post/<postUrl>/")
 def postPage(postUrl):
