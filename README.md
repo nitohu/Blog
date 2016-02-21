@@ -6,3 +6,5 @@ Small Blog System with:
  * Login
  * Registration
  * Blog posting
+ * Voting System
+ * User Profiles
