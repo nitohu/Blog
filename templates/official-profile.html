@@ -12,23 +12,31 @@
 	{% if error %}
 		 {{ error }}
 	{% else %}
-		{{ user }}
 		<h1>{{ user[0] }}'s Profil</h1>
 		<div class="row">
 			<div class="col-md-6">
 				<h3>Veröffentlichte Posts</h3>
+				{% if userPosts == [] %}
+					<p>Der Benutzer hat noch keine Posts.</p>
+				{% else %}
+					{% for row in userPosts %}
+						<h3><a href="{{ row[1] }}" target="_blank">{{ row[0] }}</a></h3>
+						<p>Veröffentlicht am {{ row[2] }}.</p>
+						<hr>
+					{% endfor %}
+				{% endif %}
 			</div>
 			<div class="col-md-6">
 				<div class="post">
 					<p><b>Benutzername:</b> {{ user[0] }}</p>
-					<p><b>E-Mail:</b> {{ user[1] }}</p>
+					<p><b>E-Mail:</b> <a href="mailto:{{ user[1] }}" target="_blank">{{ user[1] }}</a></p>
 					<p><b>Rang:</b> {{ user[2] }}</p>
-					<p><b>Website:</b> {{ user[3] }}</p>
-					<p><b>Twitter:</b> {{ user[4] }}</p>
-					<p><b>Facebook:</b> {{ user[5] }}</p>
-					<p><b>Github:</b> {{ user[6] }}</p>
-					<p><b>YouTube:</b> {{ user[7] }}</p>
-					<p><b>Skype:</b> {{ user[8] }}</p>
+					<p><b>Website:</b> <a href="{{ user[3] }}" target="_blank">{{ user[3] }}</a></p>
+					<p><b>Twitter:</b> <a href="{{ user[4] }}" target="_blank">{{ user[4] }}</a></p>
+					<p><b>Facebook:</b> <a href="{{ user[5] }}" target="_blank">{{ user[5] }}</a></p>
+					<p><b>Github:</b> <a href="{{ user[6] }}" target="_blank">{{ user[6] }}</a></p>
+					<p><b>YouTube:</b> <a href="{{ user[7] }}" target="_blank">{{ user[7] }}</a></p>
+					<p><b>Skype:</b> <a href="{{ user[8] }}" target="_blank">{{ user[8] }}</a></p>
 				<div>
 			</div>
 		</div>

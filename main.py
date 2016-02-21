@@ -123,12 +123,16 @@ def editProfilePage():
 @app.route("/profile/<username>/")
 def viewProfilePage(username):
 	userDetails = []
+	userPosts = []
 	c.execute("SELECT name, email, rank, twLink, fbLink, githubLink, ytLink, skype, link FROM users WHERE link='%s'" % username)
 	for row in c.fetchall():
 		userDetails = row
 	if userDetails == []:
 		return render_template("official-profile.html", error = "Den Benutzer '" + username + "' gibt es leider nicht.")
-	return render_template("official-profile.html", user = userDetails)
+	c.execute("SELECT title, link, published, likes, dislikes FROM posts WHERE author = '%s'" % userDetails[0])
+	for row in c.fetchall():
+		userPosts.append(row)
+	return render_template("official-profile.html", user = userDetails, userPosts = userPosts)
 
 @app.route("/post/<postUrl>/")
 def postPage(postUrl):
