@@ -60,8 +60,15 @@ def dashboardPage():
 			users.append(row)
 		if request.method == "POST":
 			if request.form["submit-post"]:
+				posts = []
+				c.execute("SELECT * FROM posts")
+				for row in c.fetchall():
+					posts.append(row)
 				if request.form["post-title"] != "" != request.form["post-content"]:
-					c.execute("INSERT INTO posts (title, published, author, content) VALUES ('%s', '%s', '%s', '%s')" % ( request.form["post-title"], strftime("%d %b %Y %H:%M:%S"), session["username"], request.form["post-content"]) )
+					for elem in posts:
+						if request.form["post-title"] == elem[0] or request.form["post-link"] == elem[4]:
+							return render_template("dashboard.html", error = "Post Link oder Titel schon vorhanden.")
+					c.execute("INSERT INTO posts (title, link, published, author, content, likes, dislikes) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s')" % ( request.form["post-title"], request.form["post-link"], strftime("%d %b %Y %H:%M:%S"), session["username"], request.form["post-content"], 0, 0) )
 					conn.commit()
 		return render_template("dashboard.html", users = users)
 	else:
@@ -109,6 +116,38 @@ def editProfilePage():
 			user.append(row)
 		return render_template("edit-profile.html", user = user)
 	return render_template("edit-profile.html")
+
+@app.route("/post/<postUrl>/")
+def postPage(postUrl):
+	post = []
+	c.execute("SELECT * FROM posts WHERE link = '%s'" % postUrl)
+	for row in c.fetchall():
+		post = row
+	return render_template("post.html", url = postUrl, post = post)
+
+@app.route("/post/<postUrl>/up/")
+def postPageVoteUp(postUrl):
+	likes = []
+	c.execute("SELECT likes FROM posts WHERE link = '%s'" % postUrl)
+	for row in c.fetchall():
+		likes = row
+	likes = list(likes)
+	likes[0] += 1
+	c.execute("UPDATE posts SET likes='%s' WHERE link='%s'" % (likes[0], postUrl))
+	conn.commit()
+	return redirect(url_for("postPage", postUrl = postUrl))
+
+@app.route("/post/<postUrl>/down/")
+def postPageVoteDown(postUrl):
+	dislikes = []
+	c.execute("SELECT dislikes FROM posts WHERE link = '%s'" % postUrl)
+	for row in c.fetchall():
+		dislikes = row
+	dislikes = list(dislikes)
+	dislikes[0] += 1
+	c.execute("UPDATE posts SET dislikes='%s' WHERE link='%s'" % (dislikes[0], postUrl))
+	conn.commit()
+	return redirect(url_for("postPage", postUrl = postUrl))
 
 @app.route("/logout/")
 def logoutPage():

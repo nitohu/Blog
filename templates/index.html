@@ -13,10 +13,19 @@
 	<div class="posts">
 		{% for elem in rows %}
 			<div class="post">
-				<h2><a href="{{ elem[4] }}">{{ elem[0] }}</a></h2>
+				<h2><a href="/post/{{ elem[4] }}">{{ elem[0] }}</a></h2>
 				<p>Eingetragen am {{ elem[1] }} von {{ elem[2] }}</p>
 				<hr>
 				<p>{{ elem[3]|safe }}</p>
+				{% if elem[5] == None == elem[6] %}
+					<b><i class="fa fa-thumbs-o-up"></i>&nbsp;0 | 0&nbsp;<i class="fa fa-thumbs-o-down"></i></b>
+				{% elif elem[6] == None %}
+					<b><i class="fa fa-thumbs-o-up"></i>&nbsp;{{ elem[5] }} | 0&nbsp;<i class="fa fa-thumbs-o-down"></i></b>
+				{% elif elem[5] == None %}
+					<b><i class="fa fa-thumbs-o-up"></i>&nbsp;0 | {{ elem[6] }}&nbsp;<i class="fa fa-thumbs-o-down"></i></b>
+				{% else %}
+					<b><i class="fa fa-thumbs-o-up"></i>&nbsp;{{ elem[5] }} | {{ elem[6] }}&nbsp;<i class="fa fa-thumbs-o-down"></i></b>
+				{% endif %}
 			</div>
 		{% endfor %}
 	</div>

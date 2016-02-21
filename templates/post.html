@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+
+{% block title %}
+	{{ url }}
+{% endblock %}
+
+{% block mainContent %}
+	<h1>{{ post[0] }}</h1>
+	<p>Eingetragen am {{ post[1] }} von {{ post[2] }}</p>
+	<hr>
+	<p>{{ post[3]|safe }}</p>
+	{% if post[5] == None == post[6] %}
+		<b><a href="{{ url_for('postPageVoteUp', postUrl = url) }}"><i class="fa fa-thumbs-o-up"></i></a>&nbsp;0 | 0&nbsp;<a href="{{ url_for('postPageVoteDown', postUrl = url) }}"><i class="fa fa-thumbs-o-down"></i></a></b>
+	{% elif post[6] == None %}
+		<b><a href="{{ url_for('postPageVoteUp', postUrl = url) }}"><i class="fa fa-thumbs-o-up"></i></a>&nbsp;{{ post[5] }} | 0&nbsp;<a href="{{ url_for('postPageVoteDown', postUrl = url) }}"><i class="fa fa-thumbs-o-down"></i></a></b>
+	{% elif post[5] == None %}
+		<b><a href="{{ url_for('postPageVoteUp', postUrl = url) }}"><i class="fa fa-thumbs-o-up"></i></a>&nbsp;0 | {{ post[6] }}&nbsp;<a href="{{ url_for('postPageVoteDown', postUrl = url) }}"><i class="fa fa-thumbs-o-down"></i></a></b>
+	{% else %}
+		<b><a href="{{ url_for('postPageVoteUp', postUrl = url) }}"><i class="fa fa-thumbs-o-up"></i></a>&nbsp;{{ post[5] }} | {{ post[6] }}&nbsp;<a href="{{ url_for('postPageVoteDown', postUrl = url) }}"><i class="fa fa-thumbs-o-down"></i></a></b>
+	{% endif %}
+{% endblock %}
