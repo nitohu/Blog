@@ -16,6 +16,7 @@ Um das Blogsystem benutzen zu können benötigst du folgende Sachen:
  * Python 3
  * Flask für Python 3
  * MySQL Datenbank
+ * MySQLdb für Python 3
 
 ### Vorbereitung
 Ohne diese Schritte wird das Blogsystem nicht funktionieren:
